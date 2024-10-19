@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather APP</title>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+       <form class="form-container" action="/submit" method="POST">
+        <div class="input-form">
+            <i class='bx bxs-map' style='color:#d765e8'  ></i>
+            <label for="exampleName"></label>
+            <input type="text" placeholder="Enter your Location" name="locationName" required>
+            <button class="image-button"><i class='bx bx-search-alt-2' style='color:#e600ff'  ></i></button>
+        </div>
+        <div >
+          <%if(locals.error){ %>
+            <div class="error-message">
+              <p><%= error %></p>
+            </div>
+           <%}else if(locals.weathers){ %>
+                <div class="info-container">
+                     <% if(weathers.weather[0].main == "Rain") { %>
+                        <i class='bx bx-cloud-rain' style='color:#e600ff' ></i>
+                      <% } %>
+                      <% if(weathers.weather[0].main == "Snow") { %>
+                        <i class='bx bx-cloud-snow' style='color:#e600ff' ></i>
+                      <% } %>
+                      <% if(weathers.weather[0].main == "Clouds") { %>
+                        <i class='bx bx-cloud' style='color:#e600ff' ></i>
+                      <%}%>
+                    <p><%= weathers.main.temp %> °C</p>
+                    <p>Place: <%= City %></p>
+                    <p><%= weathers.weather[0].main%></p>
+                </div>
+              <%}%>
+        </div>
+       </form>
+    </div>
+</body>
+</html>
